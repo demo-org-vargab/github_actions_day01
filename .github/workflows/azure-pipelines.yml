@@ -1,0 +1,33 @@
+name: Databricks Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install Databricks CLI
+      - name: Install Databricks CLI
+        run: |
+          curl -fsSL https://github.com/databricks/cli/releases/latest/download/databricks_linux_amd64 -o databricks
+          sudo install -o root -g root -m 0755 databricks /usr/local/bin/databricks
+          databricks version
+
+      # Hardcoded env values
+      - name: Bundle deploy
+        env:
+          DATABRICKS_CLIENT_ID: "95929ca9-2428-4208-857f-27e5600392b2"
+          DATABRICKS_CLIENT_SECRET: "dose344d76df2aef084800eb5af755d28225"
+          DATABRICKS_HOST: "https://dbc-84d873a5-607b.cloud.databricks.com"
+        run: |
+          echo "Host: $DATABRICKS_HOST"
+          databricks bundle validate -t dev
+          databricks bundle deploy -t dev

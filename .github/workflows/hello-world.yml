@@ -1,28 +1,28 @@
-name: Hello World
+# name: Hello World
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
 
-jobs:
-  hello:
-    runs-on: ubuntu-latest
+# jobs:
+#   hello:
+#     runs-on: ubuntu-latest
 
-    # env:
-    #   MY_SECRET: ${{ secrets.APP_ID }}
-    #   MY_VAR: ${{ vars.APP_ID_VAR }}
+#     # env:
+#     #   MY_SECRET: ${{ secrets.APP_ID }}
+#     #   MY_VAR: ${{ vars.APP_ID_VAR }}
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Print Hello World
-        run: echo "Hello World"
+#       - name: Print Hello World
+#         run: echo "Hello World"
 
-      - name: Print Variable
-        run: echo "Variable value is ${{ vars.APP_ID_VAR }}"
+#       - name: Print Variable
+#         run: echo "Variable value is ${{ vars.APP_ID_VAR }}"
 
-      - name: Print Secret
-        run: echo "Secret value is ${{ secrets.APP_ID }}"
+#       - name: Print Secret
+#         run: echo "Secret value is ${{ secrets.APP_ID }}"
