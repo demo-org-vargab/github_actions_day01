@@ -1,0 +1,13 @@
+# # The main pipeline for dbx
+# resources:
+#   pipelines:
+#     dbx_pipeline:
+#       name: dbx_pipeline
+#       catalog: workspace
+#       target: dbx_${bundle.target}
+#       libraries:
+#         - notebook:
+#             path: ../src/dlt_pipeline.ipynb
+
+#       configuration:
+#         bundle.sourcePath: ${workspace.file_path}/src
