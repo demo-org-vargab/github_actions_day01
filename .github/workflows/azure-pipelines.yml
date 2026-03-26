@@ -35,9 +35,9 @@ jobs:
       # Hardcoded env values
       - name: Bundle deploy
         env:
-          DATABRICKS_CLIENT_ID: "95929ca9-2428-4208-857f-27e5600392b2"
-          DATABRICKS_CLIENT_SECRET: "dose344d76df2aef084800eb5af755d28225"
-          DATABRICKS_HOST: "https://dbc-84d873a5-607b.cloud.databricks.com"
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
         run: |
           echo "Host: $DATABRICKS_HOST"
           databricks bundle validate -t dev
