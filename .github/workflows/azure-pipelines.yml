@@ -17,7 +17,19 @@ jobs:
       # Install Databricks CLI
       - name: Install Databricks CLI
         run: |
-          pip install databricks-cli
+          # Download the file
+          curl -L https://github.com/databricks/cli/releases/download/v0.295.0/databricks_cli_0.295.0_linux_amd64.tar.gz -o databricks.tar.gz
+          
+          # Extract it
+          tar -xzf databricks.tar.gz
+          
+          # Move binary to PATH
+          sudo mv databricks /usr/local/bin/databricks
+          
+          # Make executable (just in case)
+          sudo chmod +x /usr/local/bin/databricks
+          
+          # Verify installation
           databricks --version
 
       # Hardcoded env values
