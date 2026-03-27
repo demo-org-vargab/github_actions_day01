@@ -20,6 +20,6 @@ jobs:
         with:
           args: >
             -Dsonar.organization=demo-org-vargab
-            -Dsonar.projectKey=github_actions_day01
+            -Dsonar.projectKey=demo-org-vargab_github_actions_day01
             -Dsonar.sources=src
             -Dsonar.python.coverage.reportPaths=coverage.xml
