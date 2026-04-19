@@ -1,21 +1,26 @@
-from pyspark.sql import SparkSession, DataFrame
+# Databricks notebook source
+import pandas as pd
+from dash import Dash, dcc, html
+import plotly.express as px
+import dash_bootstrap_components as dbc
 
-def get_taxis(spark: SparkSession) -> DataFrame:
-  return spark.read.table("samples.nyctaxi.trips")
+# Initialize the Dash app with Bootstrap styling
+dash_app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+chart_data = pd.DataFrame({'x': [x for x in range(30)],
+                           'y': [2 ** x for x in range(30)]})
 
-# Create a new Databricks Connect session. If this fails,
-# check that you have configured Databricks Connect correctly.
-# See https://docs.databricks.com/dev-tools/databricks-connect.html.
-def get_spark() -> SparkSession:
-  try:
-    from databricks.connect import DatabricksSession
-    return DatabricksSession.builder.getOrCreate()
-  except ImportError:
-    return SparkSession.builder.getOrCreate()
-
-def main():
-  get_taxis(get_spark()).show(5)
+# Define the app layout
+dash_app.layout = dbc.Container([
+    dbc.Row([dbc.Col(html.H1('Hello world!!!'), width=12)]),
+    dcc.Graph(
+        id='fare-scatter',
+        figure=px.scatter(chart_data, x='x', y='y',
+            labels={'x': 'Apps', 'y': 'Fun with data'},
+            template='simple_white'),
+        style={'height': '500px', 'width': f'{min(100 + 50 * 30, 1000)}px'}
+    )
+], fluid=True)
 
 if __name__ == '__main__':
-  main()
+    dash_app.run(debug=True)
