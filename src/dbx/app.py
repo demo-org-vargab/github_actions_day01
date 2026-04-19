@@ -36,7 +36,7 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col(
             html.Div([
-                html.H1("🚀 Hello Gargi!", className="text-center mb-2"),
+                html.H1("🚀 Hello Team!", className="text-center mb-2"),
                 html.P("A modern interactive dashboard built with Dash",
                        className="text-center text-muted")
             ]),
