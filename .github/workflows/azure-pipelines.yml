@@ -22,6 +22,15 @@ jobs:
           sudo mv databricks /usr/local/bin/databricks
           sudo chmod +x /usr/local/bin/databricks
           databricks --version
+          
+      # Bundle validate
+      - name: Bundle Validate
+        env:
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+        run: |
+          databricks bundle validate -t dev
 
       # Bundle deploy
       - name: Bundle deploy
@@ -30,9 +39,9 @@ jobs:
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
         run: |
-          databricks bundle validate -t dev
           databricks bundle deploy -t dev
-          
+
+       # Deploy app   
       - name: App deploy
         env:
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
