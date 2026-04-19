@@ -5,4 +5,4 @@ resources:
       description: "Hello App deployed via bundle"
       
       # 🔥 IMPORTANT: path to your app code
-      source_code_path: ../src
+      source_code_path: ../src/dbx
