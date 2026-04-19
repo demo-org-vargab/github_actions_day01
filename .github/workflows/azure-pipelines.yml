@@ -33,6 +33,7 @@ jobs:
           echo "Host: $DATABRICKS_HOST"
           databricks bundle validate -t dev
           databricks bundle deploy -t dev
+          databricks apps deploy hello-app --source-code-path /Workspace/Users/95929ca9-2428-4208-857f-27e5600392b2/.bundle/dbx/dev/files/src/dbx
 
       # Cleanup step (always runs)
       - name: Cleanup
