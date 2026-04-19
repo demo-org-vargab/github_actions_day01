@@ -16,22 +16,13 @@ jobs:
       # Install Databricks CLI
       - name: Install Databricks CLI
         run: |
-          # Download the file
           curl -L https://github.com/databricks/cli/releases/download/v0.295.0/databricks_cli_0.295.0_linux_amd64.tar.gz -o databricks.tar.gz
-          
-          # Extract it
           tar -xzf databricks.tar.gz
-          
-          # Move binary to PATH
           sudo mv databricks /usr/local/bin/databricks
-          
-          # Make executable (just in case)
           sudo chmod +x /usr/local/bin/databricks
-          
-          # Verify installation
           databricks --version
 
-      # Hardcoded env values
+      # Bundle deploy
       - name: Bundle deploy
         env:
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
@@ -41,3 +32,13 @@ jobs:
           echo "Host: $DATABRICKS_HOST"
           databricks bundle validate -t dev
           databricks bundle deploy -t dev
+
+      # Cleanup step (always runs)
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Cleaning up temporary files..."
+          rm -f databricks.tar.gz
+          rm -f databricks
+          rm -rf .bundle
+          echo "Cleanup completed."
