@@ -30,9 +30,15 @@ jobs:
           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
         run: |
-          echo "Host: $DATABRICKS_HOST"
           databricks bundle validate -t dev
           databricks bundle deploy -t dev
+          
+      - name: App deploy
+        env:
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+        run: |
           databricks apps deploy hello-app --source-code-path /Workspace/Users/95929ca9-2428-4208-857f-27e5600392b2/.bundle/dbx/dev/files/src/dbx
 
       # Cleanup step (always runs)
