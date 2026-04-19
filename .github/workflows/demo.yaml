@@ -1,38 +1,38 @@
-name: Databricks Deploy
+# name: Databricks Deploy
 
-# on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
+# # on:
+# #   push:
+# #     branches: [ main ]
+# #   pull_request:
+# #     branches: [ main ]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    # 👇 Attach job to GitHub Environment
-    environment: dev
+#     # 👇 Attach job to GitHub Environment
+#     environment: dev
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      # Install Databricks CLI
-      - name: Install Databricks CLI
-        run: |
-          curl -L https://github.com/databricks/cli/releases/download/v0.295.0/databricks_cli_0.295.0_linux_amd64.tar.gz -o databricks.tar.gz
-          tar -xzf databricks.tar.gz
-          sudo mv databricks /usr/local/bin/databricks
-          sudo chmod +x /usr/local/bin/databricks
-          databricks --version
+#       # Install Databricks CLI
+#       - name: Install Databricks CLI
+#         run: |
+#           curl -L https://github.com/databricks/cli/releases/download/v0.295.0/databricks_cli_0.295.0_linux_amd64.tar.gz -o databricks.tar.gz
+#           tar -xzf databricks.tar.gz
+#           sudo mv databricks /usr/local/bin/databricks
+#           sudo chmod +x /usr/local/bin/databricks
+#           databricks --version
 
-      # Use environment-level secrets
-      - name: Bundle deploy
-        env:
-          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
-          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-        run: |
-          echo "Host: $DATABRICKS_HOST"
-          databricks bundle validate -t dev
-          databricks bundle deploy -t dev
+#       # Use environment-level secrets
+#       - name: Bundle deploy
+#         env:
+#           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+#           DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+#           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+#         run: |
+#           echo "Host: $DATABRICKS_HOST"
+#           databricks bundle validate -t dev
+#           databricks bundle deploy -t dev
