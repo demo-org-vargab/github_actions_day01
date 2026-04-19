@@ -1,0 +1,8 @@
+resources:
+  apps:
+    hello_app:
+      name: hello-app
+      description: "Hello App deployed via bundle"
+      
+      # 🔥 IMPORTANT: path to your app code
+      source_code_path: ../src
